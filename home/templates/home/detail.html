@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ plan.title }}</title>
+        <style>
+            /* 전체 페이지 스타일 */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+    
+            h2 {
+                text-align: center;
+                color: #333;
+            }
+    
+            /* 폼 스타일 */
+            form {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 80%;
+                margin: 0 auto;
+            }
+    
+            /* 테이블 스타일 */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+    
+            table th, table td {
+                padding: 12px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+    
+            table th {
+                background-color: #f2f2f2;
+                color: #333;
+            }
+    
+            /* 체크박스 스타일 */
+            .checkbox-cell {
+                cursor: pointer;
+                text-align: center;
+            }
+    
+            /* 체크박스를 숨기고, 클릭 시 스타일 적용 */
+            .hidden-checkbox {
+                display: none;
+            }
+    
+            .checkbox-cell.selected {
+                background-color: #ffeb3b; /* 노란색 배경 */
+            }
+    
+            /* Memo 스타일 */
+            .memo-section {
+                background-color: #fafafa;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+                margin: 10px 0;
+            }
+    
+            /* 버튼 스타일 */
+            input[type="button"], input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 20px 40px;
+                margin: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 19px;
+            }
+    
+            input[type="button"]:hover, input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+            /* 링크 스타일 */
+            a {
+                text-decoration: none;
+            }
+    
+            /* 작은 화면에서 테이블 가로 스크롤 가능 */
+            @media (max-width: 600px) {
+                table {
+                    overflow-x: auto;
+                    display: block;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h2>{{ plan.title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table width="50%" border="1">
+                <th width="40%">과목</th>
+                <th >세부 내용</th>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c1" id="c1" {% if plan.c1 %}checked{% endif %}>{{ plan.s1 }}
+                    </td>
+                    <td>
+                        {{ plan.d1 }}
+                    </td>                    
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c2" id="c2" {% if plan.c2 %}checked{% endif %}>{{ plan.s2 }}
+                    </td>
+                    <td>
+                        {{ plan.d2 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c3" id="c3" {% if plan.c3 %}checked{% endif %}>{{ plan.s3 }}
+                    </td>
+                    <td>
+                        {{ plan.d3 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c4" id="c4" {% if plan.c4 %}checked{% endif %}>{{ plan.s4 }}
+                    </td>
+                    <td>
+                        {{ plan.d4 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c5" id="c5" {% if plan.c5 %}checked{% endif %}>{{ plan.s5 }}
+                    </td>
+                    <td>
+                        {{ plan.d5 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c6" id="c6" {% if plan.c6 %}checked{% endif %}>{{ plan.s6 }}
+                    </td>
+                    <td>
+                        {{ plan.d6 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c7" id="c7" {% if plan.c7 %}checked{% endif %}>{{ plan.s7 }}
+                    </td>
+                    <td>
+                        {{ plan.d7 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c8" id="c8" {% if plan.c8 %}checked{% endif %}>{{ plan.s8 }}
+                    </td>
+                    <td>
+                        {{ plan.d8 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c9" id="c9" {% if plan.c9 %}checked{% endif %}>{{ plan.s9 }}
+                    </td>
+                    <td>
+                        {{ plan.d9 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="c10" id="c10" {% if plan.c10 %}checked{% endif %}>{{ plan.s10 }}
+                    </td>
+                    <td>
+                        {{ plan.d10 }}
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <h4>Memo</h4>
+            <p>{{ plan.memo }}</p>
+            <br>
+            <br>
+            <table width="35%" border="1">
+                <tr>
+                    <td width="3%">5</td>
+                    <td width="5%" class="checkbox-cell" id="t5_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_1" id="t5_1" {% if plan and plan.t5_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t5_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_2" id="t5_2" {% if plan and plan.t5_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t5_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_3" id="t5_3" {% if plan and plan.t5_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t5_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_4" id="t5_4" {% if plan and plan.t5_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t5_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_5" id="t5_5" {% if plan and plan.t5_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t5_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t5_6" id="t5_6" {% if plan and plan.t5_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td width="5%" class="checkbox-cell" id="t6_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_1" id="t6_1" {% if plan and plan.t6_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t6_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_2" id="t6_2" {% if plan and plan.t6_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t6_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_3" id="t6_3" {% if plan and plan.t6_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t6_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_4" id="t6_4" {% if plan and plan.t6_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t6_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_5" id="t6_5" {% if plan and plan.t6_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t6_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t6_6" id="t6_6" {% if plan and plan.t6_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td width="5%" class="checkbox-cell" id="t7_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_1" id="t7_1" {% if plan and plan.t7_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t7_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_2" id="t7_2" {% if plan and plan.t7_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t7_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_3" id="t7_3" {% if plan and plan.t7_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t7_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_4" id="t7_4" {% if plan and plan.t7_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t7_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_5" id="t7_5" {% if plan and plan.t7_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t7_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t7_6" id="t7_6" {% if plan and plan.t7_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td width="5%" class="checkbox-cell" id="t8_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_1" id="t8_1" {% if plan and plan.t8_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t8_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_2" id="t8_2" {% if plan and plan.t8_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t8_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_3" id="t8_3" {% if plan and plan.t8_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t8_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_4" id="t8_4" {% if plan and plan.t8_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t8_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_5" id="t8_5" {% if plan and plan.t8_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t8_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t8_6" id="t8_6" {% if plan and plan.t8_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td width="5%" class="checkbox-cell" id="t9_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_1" id="t9_1" {% if plan and plan.t9_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t9_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_2" id="t9_2" {% if plan and plan.t9_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t9_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_3" id="t9_3" {% if plan and plan.t9_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t9_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_4" id="t9_4" {% if plan and plan.t9_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t9_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_5" id="t9_5" {% if plan and plan.t9_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t9_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t9_6" id="t9_6" {% if plan and plan.t9_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td width="5%" class="checkbox-cell" id="t10_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_1" id="t10_1" {% if plan and plan.t10_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t10_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_2" id="t10_2" {% if plan and plan.t10_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t10_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_3" id="t10_3" {% if plan and plan.t10_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t10_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_4" id="t10_4" {% if plan and plan.t10_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t10_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_5" id="t10_5" {% if plan and plan.t10_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t10_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t10_6" id="t10_6" {% if plan and plan.t10_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td width="5%" class="checkbox-cell" id="t11_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_1" id="t11_1" {% if plan and plan.t11_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t11_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_2" id="t11_2" {% if plan and plan.t11_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t11_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_3" id="t11_3" {% if plan and plan.t11_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t11_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_4" id="t11_4" {% if plan and plan.t11_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t11_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_5" id="t11_5" {% if plan and plan.t11_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t11_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t11_6" id="t11_6" {% if plan and plan.t11_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td width="5%" class="checkbox-cell" id="t12_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_1" id="t12_1" {% if plan and plan.t12_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t12_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_2" id="t12_2" {% if plan and plan.t12_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t12_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_3" id="t12_3" {% if plan and plan.t12_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t12_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_4" id="t12_4" {% if plan and plan.t12_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t12_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_5" id="t12_5" {% if plan and plan.t12_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t12_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t12_6" id="t12_6" {% if plan and plan.t12_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td width="5%" class="checkbox-cell" id="t13_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_1" id="t13_1" {% if plan and plan.t13_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t13_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_2" id="t13_2" {% if plan and plan.t13_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t13_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_3" id="t13_3" {% if plan and plan.t13_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t13_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_4" id="t13_4" {% if plan and plan.t13_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t13_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_5" id="t13_5" {% if plan and plan.t13_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t13_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t13_6" id="t13_6" {% if plan and plan.t13_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td width="5%" class="checkbox-cell" id="t14_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_1" id="t14_1" {% if plan and plan.t14_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t14_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_2" id="t14_2" {% if plan and plan.t14_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t14_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_3" id="t14_3" {% if plan and plan.t14_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t14_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_4" id="t14_4" {% if plan and plan.t14_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t14_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_5" id="t14_5" {% if plan and plan.t14_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t14_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t14_6" id="t14_6" {% if plan and plan.t14_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td width="5%" class="checkbox-cell" id="t15_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_1" id="t15_1" {% if plan and plan.t15_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t15_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_2" id="t15_2" {% if plan and plan.t15_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t15_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_3" id="t15_3" {% if plan and plan.t15_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t15_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_4" id="t15_4" {% if plan and plan.t15_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t15_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_5" id="t15_5" {% if plan and plan.t15_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t15_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t15_6" id="t15_6" {% if plan and plan.t15_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td width="5%" class="checkbox-cell" id="t16_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_1" id="t16_1" {% if plan and plan.t16_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t16_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_2" id="t16_2" {% if plan and plan.t16_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t16_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_3" id="t16_3" {% if plan and plan.t16_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t16_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_4" id="t16_4" {% if plan and plan.t16_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t16_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_5" id="t16_5" {% if plan and plan.t16_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t16_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t16_6" id="t16_6" {% if plan and plan.t16_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td width="5%" class="checkbox-cell" id="t17_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_1" id="t17_1" {% if plan and plan.t17_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t17_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_2" id="t17_2" {% if plan and plan.t17_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t17_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_3" id="t17_3" {% if plan and plan.t17_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t17_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_4" id="t17_4" {% if plan and plan.t17_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t17_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_5" id="t17_5" {% if plan and plan.t17_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t17_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t17_6" id="t17_6" {% if plan and plan.t17_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td width="5%" class="checkbox-cell" id="t18_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_1" id="t18_1" {% if plan and plan.t18_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t18_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_2" id="t18_2" {% if plan and plan.t18_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t18_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_3" id="t18_3" {% if plan and plan.t18_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t18_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_4" id="t18_4" {% if plan and plan.t18_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t18_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_5" id="t18_5" {% if plan and plan.t18_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t18_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t18_6" id="t18_6" {% if plan and plan.t18_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td width="5%" class="checkbox-cell" id="t19_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_1" id="t19_1" {% if plan and plan.t19_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t19_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_2" id="t19_2" {% if plan and plan.t19_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t19_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_3" id="t19_3" {% if plan and plan.t19_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t19_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_4" id="t19_4" {% if plan and plan.t19_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t19_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_5" id="t19_5" {% if plan and plan.t19_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t19_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t19_6" id="t19_6" {% if plan and plan.t19_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td width="5%" class="checkbox-cell" id="t20_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_1" id="t20_1" {% if plan and plan.t20_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t20_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_2" id="t20_2" {% if plan and plan.t20_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t20_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_3" id="t20_3" {% if plan and plan.t20_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t20_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_4" id="t20_4" {% if plan and plan.t20_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t20_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_5" id="t20_5" {% if plan and plan.t20_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t20_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t20_6" id="t20_6" {% if plan and plan.t20_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td width="5%" class="checkbox-cell" id="t21_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_1" id="t21_1" {% if plan and plan.t21_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t21_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_2" id="t21_2" {% if plan and plan.t21_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t21_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_3" id="t21_3" {% if plan and plan.t21_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t21_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_4" id="t21_4" {% if plan and plan.t21_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t21_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_5" id="t21_5" {% if plan and plan.t21_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t21_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t21_6" id="t21_6" {% if plan and plan.t21_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td width="5%" class="checkbox-cell" id="t22_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_1" id="t22_1" {% if plan and plan.t22_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t22_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_2" id="t22_2" {% if plan and plan.t22_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t22_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_3" id="t22_3" {% if plan and plan.t22_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t22_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_4" id="t22_4" {% if plan and plan.t22_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t22_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_5" id="t22_5" {% if plan and plan.t22_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t22_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t22_6" id="t22_6" {% if plan and plan.t22_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td width="5%" class="checkbox-cell" id="t23_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_1" id="t23_1" {% if plan and plan.t23_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t23_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_2" id="t23_2" {% if plan and plan.t23_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t23_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_3" id="t23_3" {% if plan and plan.t23_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t23_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_4" id="t23_4" {% if plan and plan.t23_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t23_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_5" id="t23_5" {% if plan and plan.t23_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t23_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t23_6" id="t23_6" {% if plan and plan.t23_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td width="5%" class="checkbox-cell" id="t24_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_1" id="t24_1" {% if plan and plan.t24_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t24_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_2" id="t24_2" {% if plan and plan.t24_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t24_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_3" id="t24_3" {% if plan and plan.t24_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t24_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_4" id="t24_4" {% if plan and plan.t24_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t24_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_5" id="t24_5" {% if plan and plan.t24_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t24_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t24_6" id="t24_6" {% if plan and plan.t24_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td width="5%" class="checkbox-cell" id="t1_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_1" id="t1_1" {% if plan and plan.t1_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t1_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_2" id="t1_2" {% if plan and plan.t1_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t1_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_3" id="t1_3" {% if plan and plan.t1_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t1_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_4" id="t1_4" {% if plan and plan.t1_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t1_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_5" id="t1_5" {% if plan and plan.t1_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t1_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t1_6" id="t1_6" {% if plan and plan.t1_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td width="5%" class="checkbox-cell" id="t2_1" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_1" id="t2_1" {% if plan and plan.t2_1 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t2_2" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_2" id="t2_2" {% if plan and plan.t2_2 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t2_3" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_3" id="t2_3" {% if plan and plan.t2_3 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t2_4" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_4" id="t2_4" {% if plan and plan.t2_4 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t2_5" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_5" id="t2_5" {% if plan and plan.t2_5 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                    <td width="5%" class="checkbox-cell" id="t2_6" onclick="toggleColorAndCheckbox(this)">
+                        <input type="checkbox" name="t2_6" id="t2_6" {% if plan and plan.t2_6 %}checked{% endif %} class="hidden-checkbox">
+                    </td>
+                </tr>
+            </table>
+            
+            <!-- <style>
+                /* 체크박스를 화면에서 숨기고, 클릭 시 동작하도록 */
+                .hidden-checkbox {
+                    display: none; /* 체크박스를 숨깁니다 */
+                }
+                
+                /* 클릭 시 배경색을 변경할 때 스타일 */
+                .checkbox-cell {
+                    cursor: pointer; /* 클릭할 수 있음을 나타냄 */
+                }
+            
+                /* 색칠된 셀의 스타일 (노란색) */
+                .checkbox-cell.selected {
+                    background-color: yellow;
+                }
+            </style> -->
+            
+            <script>
+                // 셀을 클릭할 때마다 배경색을 노란색으로 변경/변경 해제하는 함수
+                function toggleColorAndCheckbox(cell) {
+                    var checkbox = cell.querySelector('input[type="checkbox"]');
+                    
+                    // 체크박스 상태를 반전시킴
+                    checkbox.checked = !checkbox.checked;
+                    
+                    // 셀에 색칠된 상태를 반영하기 위해 selected 클래스 추가/제거
+                    if (checkbox.checked) {
+                        cell.classList.add('selected'); // 체크된 상태에서는 노란색
+                    } else {
+                        cell.classList.remove('selected'); // 체크되지 않은 상태에서는 색 제거
+                    }
+                }
+            
+                // 페이지 로드 시 체크박스 상태에 맞게 색칠 상태 적용
+                window.onload = function() {
+                    const checkboxes = document.querySelectorAll('.checkbox-cell');
+                    checkboxes.forEach(function(cell) {
+                        var checkbox = cell.querySelector('input[type="checkbox"]');
+                        if (checkbox.checked) {
+                            cell.classList.add('selected'); // 체크된 경우 노란색
+                        }
+                    });
+                };
+            </script>
+            <br>
+            <a href ="/home/view/{{ plan.id }}/edit/"><input type="button" value="수정"></a>
+            <a href ="/home/view/{{ plan.id }}/delete"><input type="button" value="삭제"></a>
+            <input type="submit" value="돌아가기">
+        </form>
+    </body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ plan.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            margin-top: 20px; /* 표와의 간격 조정 */
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .memo {
+            margin-top: 20px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .buttons a {
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .buttons input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 150px; /* 버튼 너비 조정 */
+        }
+        .buttons input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .buttons input[type="button"] {
+            background-color: #7e7e7e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 150px; /* 버튼 너비 조정 */
+        }
+        .buttons input[type="button"]:hover {
+            background-color: #e05349;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ plan.title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th colspan="2">과목</th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c1" id="c1" {% if plan.c1 %}checked{% endif %}>{{ plan.s1 }}</td>
+                    <td>{{ plan.d1 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c2" id="c2" {% if plan.c2 %}checked{% endif %}>{{ plan.s2 }}</td>
+                    <td>{{ plan.d2 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c3" id="c3" {% if plan.c3 %}checked{% endif %}>{{ plan.s3 }}</td>
+                    <td>{{ plan.d3 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c4" id="c4" {% if plan.c4 %}checked{% endif %}>{{ plan.s4 }}</td>
+                    <td>{{ plan.d4 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c5" id="c5" {% if plan.c5 %}checked{% endif %}>{{ plan.s5 }}</td>
+                    <td>{{ plan.d5 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c6" id="c6" {% if plan.c6 %}checked{% endif %}>{{ plan.s6 }}</td>
+                    <td>{{ plan.d6 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c7" id="c7" {% if plan.c7 %}checked{% endif %}>{{ plan.s7 }}</td>
+                    <td>{{ plan.d7 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c8" id="c8" {% if plan.c8 %}checked{% endif %}>{{ plan.s8 }}</td>
+                    <td>{{ plan.d8 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c9" id="c9" {% if plan.c9 %}checked{% endif %}>{{ plan.s9 }}</td>
+                    <td>{{ plan.d9 }}</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="c10" id="c10" {% if plan.c10 %}checked{% endif %}>{{ plan.s10 }}</td>
+                    <td>{{ plan.d10 }}</td>
+                </tr>
+            </table>
+            <div class="memo">
+                <h4>Memo</h4>
+                <p>{{ plan.memo }}</p>
+            </div>
+            <div class="buttons">
+                <a href="/home/view/{{ plan.id }}/edit/"><input type="button" value="수정"></a>
+                <a href="/home/view/{{ plan.id }}/delete"><input type="button" value="삭제"></a>
+                <input type="submit" value="돌아가기">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+-->

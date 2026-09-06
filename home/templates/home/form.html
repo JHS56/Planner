@@ -1,0 +1,186 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>플래너 작성</title>
+    </head>
+    <body>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="save" name="save" type="submit">저장</button>
+        </form>
+        <br><br><br><br>
+        <a href ="/home/"><input type="submit" value="돌아가기"></a>
+    </body>
+</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>플래너 작성</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        .form-group {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            flex: 1;
+            margin-right: 10px;
+            font-weight: bold;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .form-group input[type="text"], .form-group textarea {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .title input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button, input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 19px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #f44336;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>플래너 작성</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group title">
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="id_s1" style="width: 80px;">과목 1</label>
+            {{ form.s1 }}
+            <label for="id_d1" style="width: 80px;">설명 1</label>
+            {{ form.d1 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s2" style="width: 80px;">과목 2</label>
+            {{ form.s2 }}
+            <label for="id_d2" style="width: 80px;">설명 2</label>
+            {{ form.d2 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s3" style="width: 80px;">과목 3</label>
+            {{ form.s3 }}
+            <label for="id_d3" style="width: 80px;">설명 3</label>
+            {{ form.d3 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s4" style="width: 80px;">과목 4</label>
+            {{ form.s4 }}
+            <label for="id_d4" style="width: 80px;">설명 4</label>
+            {{ form.d4 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s5" style="width: 80px;">과목 5</label>
+            {{ form.s5 }}
+            <label for="id_d5" style="width: 80px;">설명 5</label>
+            {{ form.d5 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s6" style="width: 80px;">과목 6</label>
+            {{ form.s6 }}
+            <label for="id_d6" style="width: 80px;">설명 6</label>
+            {{ form.d6 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s7" style="width: 80px;">과목 7</label>
+            {{ form.s7 }}
+            <label for="id_d7" style="width: 80px;">설명 7</label>
+            {{ form.d7 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s8" style="width: 80px;">과목 8</label>
+            {{ form.s8 }}
+            <label for="id_d8" style="width: 80px;">설명 8</label>
+            {{ form.d8 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s9" style="width: 80px;">과목 9</label>
+            {{ form.s9 }}
+            <label for="id_d9" style="width: 80px;">설명 9</label>
+            {{ form.d9 }}
+        </div>
+        <div class="form-group">
+            <label for="id_s10" style="width: 80px;">과목 10</label>
+            {{ form.s10 }}
+            <label for="id_d10" style="width: 80px;">설명 10</label>
+            {{ form.d10 }}
+        </div>
+        <div class="form-group">
+            <label for="id_memo">{{ form.memo.label }}</label>
+            {{ form.memo }}
+        </div>
+        <div class="buttons">
+            <button id="save" name="save" type="submit">저장</button>
+        </div>
+    </form>
+    <div class="buttons">
+        <a href="/home/"><input type="submit" value="돌아가기"></a>
+    </div>
+</body>
+</html>

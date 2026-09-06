@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>플래너 수정</title>
+    </head>
+    <body>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <!--<input id="title" name="title" type="text" placeholder="제목을 입력해 주세요." style='font-size:20pt' maxlength="10"/> <br><br>
+            <br><br>
+            <table width="30%" border="1">
+                <th width="3%">과목</th>
+                <th >세부 내용</th>
+                <tr>
+                    <td>
+                        <input id="s1" name="s1" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d1" name="d1" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s2" name="s2" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d2" name="d2" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s3" name="s3" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d3" name="d3" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s4" name="s4" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d4" name="d4" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s5" name="s5" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d5" name="d5" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s6" name="s6" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d6" name="d6" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s7" name="s7" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d7" name="d7" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s8" name="s8" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d8" name="s9" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s9" name="s9" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d9" name="d9" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="s10" name="s10" type="text" size="20">
+                    </td>
+                    <td>
+                        <textarea id="d10" name="d10" style="resize:none;" cols="50"></textarea>
+
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <textarea id="memo" name="memo" style="resize:none;" cols="50" placeholder="Memo"></textarea>
+            <br>-->
+            <button id="save" name="save" type="submit">저장</button>
+        </form>
+        <br><br><br><br>
+        <a href ="/home/view/{{ plan.id }}/"><input type="submit" value="돌아가기"></a>
+    </body>
+</html>

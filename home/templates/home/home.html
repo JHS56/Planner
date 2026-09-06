@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>스터디 플래너</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            font-size:40px;
+            
+        }
+        .username {
+            color: gray;
+            text-align: right;
+            margin-right: 20px;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px; /* 크기 조정 */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px; /* 크기 조정 */
+            margin: 10px 20px; /* 위치 조정 */
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .planner {
+            flex: 2;
+            margin-right: 20px;
+        }
+        .goal {
+            flex: 1;
+            font-size:20px;
+        }
+        .planner h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .plan-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .plan-list a {
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+        }
+        .plan-list a:hover {
+            background-color: #e9e9e9;
+        }
+        .goal ul {
+            list-style-type: none;
+            padding: 10px;
+            border:1px solid #f4f4f4;
+            border-radius : 5px;
+            background-color: #f4f4f4;
+            width:80%;
+        }
+        .goal li {
+            margin-bottom: 15px;
+            font-size:18px;
+        }
+        .goal a {
+            display: inline-block;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px; /* 가로 길이 조정 */
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 30px; /* 위치 조정 */
+        }
+        .goal a:hover {
+            background-color: #45a049;
+        }
+        .create-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px; /* 가로 폭 조정 */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .create-btn:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .planner, .goal {
+                flex: 1;
+                margin-right: 0;
+            }
+            .username {
+                text-align: center;
+                margin-right: 0;
+            }
+            .logout-btn {
+                margin: 10px auto; /* 가운데 정렬 */
+                display: block; /* 블록 요소로 변경 */
+            }
+            .goal a {
+                display: block;
+                margin: 5px auto; /* 가운데 정렬 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>스터디 플래너</h1>
+    <h4 class="username">{{ object.user }}</h4>
+    <hr>
+    <div class="container">
+        <div class="planner">
+            <h2>ㅤ일정 목록</h2>
+            {% if planner %}
+                <ul class="plan-list">
+                    {% for plan in planner %}
+                        <li><h3><a href="/home/view/{{ plan.id }}/">{{ plan.title }}</a></h3></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>일정이 존재하지 않습니다.</p>
+            {% endif %}
+            <br>
+            <a>ㅤ</a><a href="/home/create/" class="create-btn">일정 만들기</a>
+        </div>
+        <div class="goal">
+            <h3>목표</h3>
+            {% if object %}
+                <ul>
+                    <li>{{ object.description_1 }}</li>
+                    <li>{{ object.description_2 }}</li>
+                    <li>{{ object.description_3 }}</li>
+                    <li>{{ object.description_4 }}</li>
+                    <li>{{ object.description_5 }}</li>
+                </ul>
+                <a href="{% url 'edit_goal' object.id %}" class="goal-edit-btn">수정</a>
+            {% else %}
+                <p>목표가 존재하지 않습니다.</p>
+                <a href="/home/goal/" class="goal-edit-btn">수정</a>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <a href="/accounts/login/" class="logout-btn">로그아웃</a>
+</body>
+</html>

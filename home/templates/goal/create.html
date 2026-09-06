@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>목표 설정</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size:17px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            font-size:16px;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button[type="submit"], .back-link input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 19px;
+        }
+        button[type="submit"]:hover, .back-link input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 19px;
+        }
+        .back-link input[type="submit"]:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>목표 설정</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="id_goal1">목표1</label>
+                <input type="text" id="id_goal1" name="description_1" value="">
+            </div>
+            <div>
+                <label for="id_goal2">목표2</label>
+                <input type="text" id="id_goal2" name="description_2" value="">
+            </div>
+            <div>
+                <label for="id_goal3">목표3</label>
+                <input type="text" id="id_goal3" name="description_3" value="">
+            </div>
+            <div>
+                <label for="id_goal4">목표4</label>
+                <input type="text" id="id_goal4" name="description_4" value="">
+            </div>
+            <div>
+                <label for="id_goal5">목표5</label>
+                <input type="text" id="id_goal5" name="description_5" value="">
+            </div>
+            <button type="submit">저장</button>
+        </form>
+        <div class="back-link">
+            <a href="/home/"><input type="submit" value="돌아가기"></a>
+        </div>
+    </div>
+</body>
+</html>

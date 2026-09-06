@@ -1,0 +1,80 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ plan.title }}</title>
+</head>
+<body>
+    <h1 style="color:red;">"{{ plan.title }}" 삭제</h1>
+    <p>정말로 삭제하겠습니까? 한 번 삭제하면 되돌릴 수 없습니다.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">네</button>
+    </form>
+    <a href="/home/view/{{ plan.id }}/"><button type="submit">아니요</button></a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ plan.title }} 삭제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: red;
+            margin-top: 50px;
+        }
+        p {
+            margin-top: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        button[type="submit"] {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: #da190b;
+        }
+        a {
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+            color: #333;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>"{{ plan.title }}" 삭제</h1>
+    <p>정말로 삭제하겠습니까? 한 번 삭제하면 되돌릴 수 없습니다.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">네</button>
+    </form>
+    <a href="/home/view/{{ plan.id }}/">아니요</a>
+</body>
+</html>

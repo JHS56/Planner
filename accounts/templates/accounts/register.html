@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .signup-container {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px; /* 전체적인 크기를 줄임 */
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+            font-size: 20px; /* 제목 크기 줄임 */
+        }
+        form {
+            margin-top: 10px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px; /* 간격 줄임 */
+            color: #333;
+            font-size: 14px; /* 글꼴 크기 줄임 */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 8px; /* 패딩 줄임 */
+            margin-bottom: 10px; /* 마진 줄임 */
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px; /* 글꼴 크기 줄임 */
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #2255a4; /* 파란색 */
+            color: white;
+            padding: 10px 15px; /* 패딩 줄임 */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px; /* 글꼴 크기 줄임 */
+            width: 100%;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover {
+            background-color: #1c4b89; /* 약간 채도가 낮은 파란색 */
+        }
+        .login-link {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px; /* 글꼴 크기 줄임 */
+        }
+        .login-link a {
+            color: #333;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>회원가입</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">회원가입</button>
+        </form>
+        <div class="login-link">
+            <a href="{% url 'login' %}">로그인 하러 가기</a>
+        </div>
+    </div>
+</body>
+</html>
